@@ -24,7 +24,7 @@ checklist of things one must do before making a PyPI release:
    [Zulip server repo][zulip-repo] to render the interactive bots on
    [Zulip's integrations page](https://zulip.com/integrations/). The server
    repo installs the `zulip_bots` package
-   [directly from the GitHub repository][requirements-link] so that this extra
+   directly from the GitHub repository so that this extra
    content is included in its installation of the package.
 
 3. Follow PyPI's instructions in
@@ -50,16 +50,16 @@ checklist of things one must do before making a PyPI release:
    See [the tag][example-tag] and [the commit][example-commit] for the 0.8.1 release
    to see an example.
 
-Now it is time to [update the dependencies](../subsystems/dependencies) in the
+Now it is time to [update the dependencies](dependencies) in the
 [Zulip server repository][zulip-repo]:
 
 1. Increment `PROVISION_VERSION` in `version.py`. A minor version bump should suffice in
    most cases.
 
 2. Update the release tags in the Git URLs for `zulip` and `zulip_bots` in
-   `requirements/common.in`.
+   `pyproject.toml`.
 
-3. Run `tools/update-locked-requirements` to update the rest of the requirements files.
+3. Run `uv lock` to update the Python lock file.
 
 4. Commit your changes and submit a PR! **Note**: See
    [this example commit][example-zulip-commit] to get an idea of what the final change
@@ -83,7 +83,6 @@ update to dependencies required in the [Zulip server repo][zulip-repo].
 [zulip-package]: https://github.com/zulip/python-zulip-api/tree/main/zulip
 [zulip-bots-package]: https://github.com/zulip/python-zulip-api/tree/main/zulip_bots
 [zulip-botserver-package]: https://github.com/zulip/python-zulip-api/tree/main/zulip_botserver
-[requirements-link]: https://github.com/zulip/zulip/blob/main/requirements/common.in#L116
 [generating-dist-archives]: https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives
 [upload-dist-archives]: https://packaging.python.org/en/latest/tutorials/packaging-projects/#uploading-the-distribution-archives
 [install-pkg]: https://packaging.python.org/en/latest/tutorials/packaging-projects/#installing-your-newly-uploaded-package

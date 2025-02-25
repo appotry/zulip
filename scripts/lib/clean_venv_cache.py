@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
+
+# TODO: After switching from pip to uv, we no longer create
+# /srv/zulip-venv-cache or symlink zulip-py3-venv, so this script can be
+# replaced with shutil.rmtree("/srv/zulip-venv-cache").
+
 import argparse
 import glob
 import os
 import sys
-from typing import Set
 
 ZULIP_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(ZULIP_PATH)
@@ -19,7 +23,7 @@ ENV = get_environment()
 VENV_CACHE_DIR = "/srv/zulip-venv-cache"
 
 
-def get_caches_in_use(threshold_days: int) -> Set[str]:
+def get_caches_in_use(threshold_days: int) -> set[str]:
     setups_to_check = {ZULIP_PATH}
     caches_in_use = set()
 
